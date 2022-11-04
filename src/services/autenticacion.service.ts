@@ -14,9 +14,6 @@ export class AutenticacionService {
     public personaRepository: PersonaRepository
   ) { }
 
-  /*
-   * Add service methods here
-   */
   GenerarClave() {
     let clave = generador(8, false);
     return clave;
