@@ -12,6 +12,7 @@ import {
   getModelSchemaRef, HttpErrors, param, patch, post, put, requestBody,
   response
 } from '@loopback/rest';
+import { Llaves } from '../config/llaves';
 import {Credenciales, Persona} from '../models';
 import {PersonaRepository} from '../repositories';
 import {AutenticacionService} from '../services';
@@ -52,7 +53,7 @@ export class PersonaController {
     let destino = persona.correo;
     let asunto = 'Registro en la plataforma';
     let contenido = `Hola ${persona.nombres}, su usuario es: ${persona.correo} y su contraseña es: ${clave}`;
-    fetch(`http://127.0.0.1:5000/envio-correo?correo_destino=${destino}&asunto=${asunto}&contenido=${contenido}`)
+    fetch(`${Llaves.cadenaConexion}/envio-correo?correo_destino=${destino}&asunto=${asunto}&contenido=${contenido}`)
       .then((data: any) => {
         console.log(data);
       });
@@ -77,7 +78,6 @@ export class PersonaController {
     } else {
       throw new HttpErrors[401]('Datos invalidos');
     }
-
   }
 
   @get('/personas/count')

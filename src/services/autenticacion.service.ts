@@ -44,8 +44,18 @@ export class AutenticacionService {
         nombre: persona.nombres + " " + persona.apellidos
       }
     },
-      Llaves.llaveJWT);
+    Llaves.llaveJWT);
     return token;
   }
 
+  ValidarTokenJWT(token: string) {
+    try {
+      let datos = jwt.verify(token, Llaves.llaveJWT);
+      return datos;
+    } catch {
+      return false;
+    }
+  }
 }
+
+
